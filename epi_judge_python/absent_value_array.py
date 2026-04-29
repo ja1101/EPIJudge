@@ -5,8 +5,12 @@ from test_framework.test_failure import TestFailure
 
 
 def find_missing_element(stream: Iterator[int]) -> int:
-    # TODO - you fill in here.
-    return 0
+    s = set(stream)
+    sr = set(range(len(s) + 1))
+    sr -= s
+    if len(sr) > 0:
+        return sr.pop()
+    return -1
 
 
 def find_missing_element_wrapper(stream):
