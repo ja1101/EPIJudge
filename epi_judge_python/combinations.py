@@ -7,7 +7,7 @@ def combinations(n: int, k: int) -> List[List[int]]:
     def directed_combinations(offset: int,
                               partial_combination: List[int]) -> None:
         if len(partial_combination) == k:
-            result.append(partial_combination.y())
+            result.append(partial_combination.copy())
             return
 
         num_remaining = k - len(partial_combination)
