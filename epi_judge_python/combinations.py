@@ -4,20 +4,23 @@ from test_framework import generic_test, test_utils
 
 
 def combinations(n: int, k: int) -> List[List[int]]:
-    def directed_combinations(offset: int,
-                              partial_combination: List[int]) -> None:
-        if len(partial_combination) == k:
-            result.append(partial_combination.copy())
-            return
-
-        num_remaining = k - len(partial_combination)
-        for i in range(offset, n - num_remaining + 2):
-            partial_combination.append(i)
-            directed_combinations(i + 1, partial_combination)
-            partial_combination.pop()
+    if k == 0:
+        return [[]]
+    if k < 0 or k > n:
+        return []
 
     result: List[List[int]] = []
-    directed_combinations(1, [])
+    comb = list(range(1, k + 1))
+    while True:
+        result.append(comb.copy())
+        i = k - 1
+        while i >= 0 and comb[i] == n - k + 1 + i:
+            i -= 1
+        if i < 0:
+            break
+        comb[i] += 1
+        for j in range(i + 1, k):
+            comb[j] = comb[j - 1] + 1
     return result
 
 
