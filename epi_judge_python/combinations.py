@@ -4,9 +4,21 @@ from test_framework import generic_test, test_utils
 
 
 def combinations(n: int, k: int) -> List[List[int]]:
-    '''Lists all the ways to pick k elements from the list 1 to n'''
-    # TODO - you fill in here.
-    return []
+    def directed_combinations(offset: int,
+                              partial_combination: List[int]) -> None:
+        if len(partial_combination) == k:
+            result.append(partial_combination.y())
+            return
+
+        num_remaining = k - len(partial_combination)
+        for i in range(offset, n - num_remaining + 2):
+            partial_combination.append(i)
+            directed_combinations(i + 1, partial_combination)
+            partial_combination.pop()
+
+    result: List[List[int]] = []
+    directed_combinations(1, [])
+    return result
 
 
 if __name__ == '__main__':
